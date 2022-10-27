@@ -1,0 +1,71 @@
+.sidebar {
+  flex: 0.6;
+  border-right: 0.5px solid lightgray;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ff612b;
+  color: #ffffff;
+
+  .top {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+
+    .logo {
+      font-size: 3rem;
+      font-weight: 900;
+    }
+  }
+
+  .center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        padding: 2rem 0rem;
+        .icon {
+          cursor: pointer;
+          font-size: 2rem;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        padding: 1rem 0rem;
+        .profile_image {
+          cursor: pointer;
+          height: 60px;
+          width: 60px;
+          object-fit: cover;
+          border-radius: 10rem;
+        }
+        .icon {
+          cursor: pointer;
+          font-size: 2.2rem;
+          margin-left: 0.7rem;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
