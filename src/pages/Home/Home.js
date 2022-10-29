@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./Home.scss";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -30,6 +30,7 @@ const MenuProps = {
 };
 
 function Home() {
+  const [predicted, setpredicted] = useState("");
   const [personSymptoms, setpersonSymptoms] = useState([]);
   const [userData, setuserData] = useState({
     labels: UserData.map((data) => data.day),
@@ -46,26 +47,16 @@ function Home() {
       target: { value },
     } = event;
     setpersonSymptoms(typeof value === "string" ? value.split(",") : value);
-    console.log(personSymptoms)
   };
 
-  const predictDisease = (event) => {
-    event.preventDefault()
-    console.log(personSymptoms)
-    axios({
-      method: 'post',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      url: 'http://localhost:8080/api/predict',
-      body: {"data": personSymptoms}
-    })
-    .then((response) => {
-      console.log(response)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  function handleClick() {
+    let newSymptoms = Object.assign({}, Symptoms);
+    for (let i = 0; i < personSymptoms.length; i++) {
+      newSymptoms[personSymptoms[i]] = 1;
+    }
+    axios
+      .post("predict", { newSymptoms })
+      .then((response) => setpredicted(response.data.ans));
   }
 
   return (
@@ -188,38 +179,42 @@ function Home() {
           </div>
         </div>
 
-        <div className="disease_detect">
-          <h1>What are you feeling today?</h1>
+        <div className="disease">
+          <div className="disease_detect">
+            <h1>What are you feeling today?</h1>
 
-          <FormControl sx={{ m: 1, width: 400, margin: "2rem 0rem" }}>
-            <InputLabel id="demo-multiple-checkbox-label">
-              Select your symptoms here...
-            </InputLabel>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              multiple
-              value={personSymptoms}
-              onChange={handleChange}
-              input={<OutlinedInput label="Symptoms" />}
-              renderValue={(selected) => selected.join(", ")}
-              placeholder="Select your Symptoms"
-              MenuProps={MenuProps}
-            >
-              {Object.keys(Symptoms).map((symptom) => (
-                <MenuItem key={symptom} value={symptom}>
-                  <Checkbox checked={personSymptoms.indexOf(symptom) > -1} />
-                  <ListItemText primary={symptom} />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+            <FormControl sx={{ m: 1, width: 400, margin: "2rem 0rem" }}>
+              <InputLabel id="demo-multiple-checkbox-label">
+                Select your symptoms here...
+              </InputLabel>
+              <Select
+                labelId="demo-multiple-checkbox-label"
+                id="demo-multiple-checkbox"
+                multiple
+                value={personSymptoms}
+                onChange={handleChange}
+                input={<OutlinedInput label="Symptoms" />}
+                renderValue={(selected) => selected.join(", ")}
+                placeholder="Select your Symptoms"
+                MenuProps={MenuProps}
+              >
+                {Object.keys(Symptoms).map((symptom) => (
+                  <MenuItem key={symptom} value={symptom}>
+                    <Checkbox checked={personSymptoms.indexOf(symptom) > -1} />
+                    <ListItemText primary={symptom} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
-          <div 
-          className="button"
-          onClick={predictDisease}>
-            <p>Check</p>
-            <HealingIcon />
+            <div className="button" onClick={handleClick}>
+              <p>Check</p>
+              <HealingIcon />
+            </div>
+          </div>
+
+          <div className="disease_result">
+            <h1>You may have {predicted}</h1>
           </div>
         </div>
 

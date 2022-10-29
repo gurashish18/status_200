@@ -21,37 +21,6 @@ export const UserData = [
   },
 ];
 
-<<<<<<< HEAD
-export const Symptoms = [
-  "itching",
-  "weight_loss",
-  "back_pain",
-  "mild_fever",
-  "fast_heart_rate",
-  "neck_pain",
-  "swollen_extremeties",
-  "slurred_speech",
-  "hip_joint_pain",
-  "movement_stiffness",
-  "unsteadiness",
-  "loss_of_smell",
-  "continuous_feel_of_urine",
-  "internal_itching",
-  "depression",
-  "muscle_pain",
-  "altered_sensorium",
-  "belly_pain",
-  "abnormal_menstruation",
-  "dischromic_patches",
-  "polyuria",
-  "lack_of_concentration",
-  "fluid_overload",
-  "blood_in_sputum",
-  "prominent_veins_on_calf",
-  "silver_like_dusting",
-  "yellow_crust_ooze"
-];
-=======
 export const Symptoms = {
   "itching": 0,
   "weight_loss": 0,
@@ -81,4 +50,3 @@ export const Symptoms = {
   "silver_like_dusting": 0,
   "yellow_crust_ooze": 0
 }
->>>>>>> b2aee1d31faf9fb37cc04848627c8cede20b0ea6

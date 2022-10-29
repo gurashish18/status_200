@@ -23,7 +23,7 @@ app.post("/api/predict", (req, res) => {
     for(let i=0; i<data.length; i++){
         payload[`'${data[i]}'`] = 1
     }
-    console.log(payload)
+    console.log("Payload", payload)
     axios({
         method: 'post',
         url: 'https://diseasefastapi.herokuapp.com/predict',
