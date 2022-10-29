@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./Home.scss";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -45,7 +46,28 @@ function Home() {
       target: { value },
     } = event;
     setpersonSymptoms(typeof value === "string" ? value.split(",") : value);
+    console.log(personSymptoms)
   };
+
+  const predictDisease = (event) => {
+    event.preventDefault()
+    console.log(personSymptoms)
+    axios({
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      url: 'http://localhost:8080/api/predict',
+      body: {"data": personSymptoms}
+    })
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+
   return (
     <div className="home">
       <Sidebar />
@@ -184,7 +206,7 @@ function Home() {
               placeholder="Select your Symptoms"
               MenuProps={MenuProps}
             >
-              {Symptoms.map((symptom) => (
+              {Object.keys(Symptoms).map((symptom) => (
                 <MenuItem key={symptom} value={symptom}>
                   <Checkbox checked={personSymptoms.indexOf(symptom) > -1} />
                   <ListItemText primary={symptom} />
@@ -193,7 +215,9 @@ function Home() {
             </Select>
           </FormControl>
 
-          <div className="button">
+          <div 
+          className="button"
+          onClick={predictDisease}>
             <p>Check</p>
             <HealingIcon />
           </div>
