@@ -1,11 +1,12 @@
 import React from "react";
 import "./Signup.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
   return (
     <div className="signup_container">
-      <form className="signup_from" onSubmit={() => alert("Hello")}>
+      <form className="signup_from" onSubmit={() => navigate("/home")}>
         <h1>Signup</h1>
 
         <p>

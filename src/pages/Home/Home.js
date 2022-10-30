@@ -32,6 +32,7 @@ const MenuProps = {
 
 function Home() {
   const [loading, setloading] = useState(false);
+  const [gotans, setgotans] = useState(false);
   const [predicted, setpredicted] = useState("");
   const [personSymptoms, setpersonSymptoms] = useState([]);
   const [userData, setuserData] = useState({
@@ -61,6 +62,7 @@ function Home() {
       .post("predict", { newSymptoms })
       .then((response) => setpredicted(response.data.ans));
     setloading(false);
+    setgotans(true);
   }
 
   return (
@@ -235,9 +237,68 @@ function Home() {
             </button>
           </div>
 
-          <div className="disease_result">
+          {/* <div className="disease_result">
             <h1>You may have {predicted}</h1>
-          </div>
+          </div> */}
+
+          {gotans === true && (
+            <div className="disease_result">
+              <h1>
+                You may have{" "}
+                <span style={{ color: "#D0342C" }}>{predicted}</span>
+              </h1>
+
+              <div className="results">
+                <div className="causes">
+                  <h2>Causes:</h2>
+                  <ol>
+                    <li>
+                      Fluctuating hormone levels around the time of a woman’s
+                      period.
+                    </li>
+                    <li>Picking at acne sores.</li>
+                    <li>
+                      Clothing and headgear, like hats and sports helmets.
+                    </li>
+                    <li>
+                      Air pollution and certain weather conditions, especially
+                      high humidity.
+                    </li>
+                    <li>
+                      Using oily or greasy personal care products (like heavy
+                      lotions, creams or hair pomades and waxes) or working in
+                      an area where you routinely come in contact with grease
+                      (such as working at a restaurant where there are greasy
+                      food surfaces and frying oil).
+                    </li>
+                    <li>
+                      Stress, which increases the hormone cortisol, can also
+                      cause acne to flare.
+                    </li>
+                    <li>Some medications.</li>
+                    <li>Genetics</li>
+                  </ol>
+                </div>
+
+                <div className="prevention">
+                  <h2>Prevention:</h2>
+                  <ol>
+                    <li>
+                      Wash your face daily with warm water and a mild facial
+                      cleanser.
+                    </li>
+                    <li>Routinely use moisturizer.</li>
+                    <li>
+                      You don’t have to stop using makeup, but try to use
+                      “non-comedogenic” products and remove makeup at the end of
+                      each day.
+                    </li>
+                    <li>Keep your hands away from your face.</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="charts">

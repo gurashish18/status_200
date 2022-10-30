@@ -87,6 +87,7 @@
 
     .disease {
       display: flex;
+      flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
       margin: 4rem 0rem;
@@ -104,11 +105,37 @@
       }
 
       .disease_result {
-        flex: 0.5;
+        margin-top: 2rem;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
+        margin-left: 2rem;
+
+        .results {
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+        }
+
+        .causes {
+          padding: 2rem;
+          margin: 1rem;
+          flex: 0.5;
+          font-size: 1.2rem;
+          ol {
+            list-style-type: disc;
+          }
+        }
+        .prevention {
+          padding: 2rem;
+          margin: 1rem;
+          flex: 0.5;
+          font-size: 1.2rem;
+          ol {
+            list-style-type: disc;
+          }
+        }
       }
 
       .button {
