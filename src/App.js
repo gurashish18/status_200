@@ -4,10 +4,12 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import Diagnosis from "./pages/Diagnosis/Diagnosis";
+import Sidebar from "./components/sidebar/Sidebar";
 
 function App() {
   return (
     <Router>
+      <Sidebar />
       <Routes>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/diagnosis" element={<Diagnosis />}></Route>

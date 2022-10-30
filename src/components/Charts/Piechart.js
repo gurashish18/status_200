@@ -1,8 +1,8 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 
-function Barchart({ chartData }) {
+function Piechart({ chartData }) {
   const options = {
     backgroundColor: [
       "rgba(255, 99, 132, 0.8)",
@@ -22,7 +22,6 @@ function Barchart({ chartData }) {
       "rgb(153, 102, 255)",
       "rgb(201, 203, 207)",
     ],
-    barThickness: 50,
     responsive: true,
     scales: {
       y: {
@@ -30,7 +29,7 @@ function Barchart({ chartData }) {
       },
     },
   };
-  return <Bar data={chartData} options={options} />;
+  return <Pie data={chartData} options={options} />;
 }
 
-export default Barchart;
+export default Piechart;

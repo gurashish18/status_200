@@ -6,7 +6,7 @@ function Login() {
   return (
     <div className="login_container">
       <form className="login_from" onSubmit={() => alert("Hello")}>
-        <h1>Welcom back!</h1>
+        <h1>Welcome back!</h1>
         <p>
           Don't have an Account? <Link to="/signup">Click here</Link>
         </p>

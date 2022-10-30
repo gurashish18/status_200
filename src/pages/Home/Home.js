@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Sidebar from "../../components/sidebar/Sidebar";
 import "./Home.scss";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -17,6 +16,8 @@ import ListItemText from "@mui/material/ListItemText";
 import { Symptoms } from "../../Data";
 import HealingIcon from "@mui/icons-material/Healing";
 import FormControl from "@mui/material/FormControl";
+import MenuIcon from "@mui/icons-material/Menu";
+import Piechart from "../../components/Charts/Piechart";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -30,6 +31,7 @@ const MenuProps = {
 };
 
 function Home() {
+  const [loading, setloading] = useState(false);
   const [predicted, setpredicted] = useState("");
   const [personSymptoms, setpersonSymptoms] = useState([]);
   const [userData, setuserData] = useState({
@@ -50,6 +52,7 @@ function Home() {
   };
 
   function handleClick() {
+    setloading(true);
     let newSymptoms = Object.assign({}, Symptoms);
     for (let i = 0; i < personSymptoms.length; i++) {
       newSymptoms[personSymptoms[i]] = 1;
@@ -57,11 +60,11 @@ function Home() {
     axios
       .post("predict", { newSymptoms })
       .then((response) => setpredicted(response.data.ans));
+    setloading(false);
   }
 
   return (
     <div className="home">
-      <Sidebar />
       <div className="home_main_conatiner">
         <div className="main_top">
           <h1>Dashboard</h1>
@@ -69,22 +72,28 @@ function Home() {
             <CalendarMonthIcon />
             <p>Wednesday, 24-10-2022</p>
           </div>
+          <MenuIcon className="icon" />
         </div>
 
         <div className="health_metrices">
-          <div className="card">
+          <div
+            className="card"
+            style={{
+              background: "rgb(2,0,36)",
+              background:
+                "linear-gradient(90deg, rgba(2,0,36,1) 8%, rgba(9,9,121,1) 30%, rgba(0,212,255,1) 98%)",
+            }}
+          >
             <div className="card_top">
-              <DeviceThermostatIcon
-                style={{ color: "#00008B", fontSize: "3rem" }}
-              />
-              <p style={{ color: "#00008B", fontSize: "2rem" }}>
-                36.6 <span style={{ fontSize: "1.5rem" }}>°C</span>
+              <DeviceThermostatIcon className="icon" />
+              <p>
+                36.6 <span style={{ fontSize: "2.5rem" }}>°C</span>
               </p>
             </div>
             <div
               className="card_center"
               style={{
-                fontSize: "1.2rem",
+                fontSize: "2rem",
                 fontWeight: 700,
                 display: "flex",
                 alignItems: "center",
@@ -94,23 +103,28 @@ function Home() {
               Temperature
             </div>
             <div className="card_bottom">
-              <p style={{ color: "darkgray" }}>
-                Temperature below 35 °C indicates a serious illness
-              </p>
+              <p>Temperature below 35 °C indicates a serious illness</p>
             </div>
           </div>
 
-          <div className="card">
+          <div
+            className="card"
+            style={{
+              background: "rgb(36,28,28)",
+              background:
+                "linear-gradient(90deg, rgba(36,28,28,1) 0%, rgba(152,11,35,1) 44%, rgba(255,0,0,1) 98%)",
+            }}
+          >
             <div className="card_top">
-              <FavoriteIcon style={{ color: "#880808", fontSize: "3rem" }} />
-              <p style={{ color: "#880808", fontSize: "2rem" }}>
-                102 <span style={{ fontSize: "1.5rem" }}>bpm</span>
+              <FavoriteIcon className="icon" />
+              <p>
+                102 <span style={{ fontSize: "2.5rem" }}>bpm</span>
               </p>
             </div>
             <div
               className="card_center"
               style={{
-                fontSize: "1.2rem",
+                fontSize: "2rem",
                 fontWeight: 700,
                 display: "flex",
                 alignItems: "center",
@@ -120,23 +134,28 @@ function Home() {
               Heart Rate
             </div>
             <div className="card_bottom">
-              <p style={{ color: "darkgray" }}>
-                Pulse is the most important phsyicological indicator
-              </p>
+              <p>Pulse is the most important phsyicological indicator</p>
             </div>
           </div>
 
-          <div className="card">
+          <div
+            className="card"
+            style={{
+              background: "rgb(36,28,28)",
+              background:
+                "linear-gradient(90deg, rgba(36,28,28,1) 0%, rgba(7,103,34,1) 44%, rgba(18,255,0,1) 98%)",
+            }}
+          >
             <div className="card_top">
-              <BloodtypeIcon style={{ color: "#023020", fontSize: "3rem" }} />
-              <p style={{ color: "#023020", fontSize: "2rem" }}>
-                120 <span style={{ fontSize: "1.5rem" }}>/80</span>
+              <BloodtypeIcon className="icon" />
+              <p>
+                120 <span style={{ fontSize: "2.5rem" }}>/80</span>
               </p>
             </div>
             <div
               className="card_center"
               style={{
-                fontSize: "1.2rem",
+                fontSize: "2rem",
                 fontWeight: 700,
                 display: "flex",
                 alignItems: "center",
@@ -146,23 +165,28 @@ function Home() {
               Blood Pressure
             </div>
             <div className="card_bottom">
-              <p style={{ color: "darkgray" }}>
-                Blood Pressure can rise and fall several times a day
-              </p>
+              <p>Blood Pressure can rise and fall several times a day</p>
             </div>
           </div>
 
-          <div className="card">
+          <div
+            className="card"
+            style={{
+              background: "rgb(96,48,9)",
+              background:
+                "linear-gradient(90deg, rgba(96,48,9,1) 0%, rgba(181,106,32,1) 39%, rgba(237,137,22,1) 98%)",
+            }}
+          >
             <div className="card_top">
-              <FavoriteIcon style={{ color: "#e4d00a", fontSize: "3rem" }} />
-              <p style={{ color: "#e4d00a", fontSize: "2rem" }}>
-                90 <span style={{ fontSize: "1.5rem" }}>mg/dl</span>
+              <FavoriteIcon className="icon" />
+              <p>
+                90 <span style={{ fontSize: "2.5rem" }}>mg/dl</span>
               </p>
             </div>
             <div
               className="card_center"
               style={{
-                fontSize: "1.2rem",
+                fontSize: "2rem",
                 fontWeight: 700,
                 display: "flex",
                 alignItems: "center",
@@ -172,9 +196,7 @@ function Home() {
               Glucose
             </div>
             <div className="card_bottom">
-              <p style={{ color: "darkgray" }}>
-                The normal concentration of Glucose is 80-120 mg/dl
-              </p>
+              <p>The normal concentration of Glucose is 80-120 mg/dl</p>
             </div>
           </div>
         </div>
@@ -207,10 +229,10 @@ function Home() {
               </Select>
             </FormControl>
 
-            <div className="button" onClick={handleClick}>
+            <button className="button" onClick={handleClick} disabled={loading}>
               <p>Check</p>
               <HealingIcon />
-            </div>
+            </button>
           </div>
 
           <div className="disease_result">
@@ -223,11 +245,11 @@ function Home() {
             <Barchart chartData={userData} />
           </div>
           <div className="pie_chart">
-            <Barchart chartData={userData} />
+            <Piechart chartData={userData} />
           </div>
         </div>
       </div>
-      <div className="home_right_conatiner">
+      {/* <div className="home_right_conatiner">
         <div className="user_info">
           <div className="user_name">
             <img
@@ -270,7 +292,7 @@ function Home() {
           </div>
         </div>
         <div className="chat_support">Chat Support system</div>
-      </div>
+      </div> */}
     </div>
   );
 }

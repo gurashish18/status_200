@@ -6,35 +6,45 @@ import MessageIcon from "@mui/icons-material/Message";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
     <div className="sidebar">
-      <div className="top">
-        <MonitorHeartIcon className="logo" />
-      </div>
+      <div className="top">{/* <MonitorHeartIcon className="logo" /> */}</div>
       <div className="center">
         <ul>
           <li>
-            <Link to="/">
-              <DashboardIcon className="icon" />
-            </Link>
+            <NavLink to="/home" activeClassName="active">
+              <div className="icon_container">
+                <DashboardIcon className="icon" />
+                <p>Dashboard</p>
+              </div>
+            </NavLink>
           </li>
           <li>
-            <Link to="/mydates">
-              <CalendarMonthIcon className="icon" />
-            </Link>
+            <NavLink to="/mydates" activeClassName="active">
+              <div className="icon_container">
+                <CalendarMonthIcon className="icon" />
+                <p>Schedules</p>
+              </div>
+            </NavLink>
           </li>
           <li>
-            <Link to="/messages">
-              <MessageIcon className="icon" />
-            </Link>
+            <NavLink to="/messages" activeClassName="active">
+              <div className="icon_container">
+                <MessageIcon className="icon" />
+                <p>Messages</p>
+              </div>
+            </NavLink>
           </li>
           <li>
-            <Link to="/settings">
-              <SettingsIcon className="icon" />
-            </Link>
+            <NavLink to="/settings" activeClassName="active">
+              <div className="icon_container">
+                <SettingsIcon className="icon" />
+                <p>Settings</p>
+              </div>
+            </NavLink>
           </li>
         </ul>
       </div>
@@ -49,7 +59,10 @@ function Sidebar() {
           </li>
           <li>
             <Link to="login">
-              <LogoutIcon className="icon" />
+              <div className="icon_container">
+                <LogoutIcon className="icon" />
+                <p>Logout</p>
+              </div>
             </Link>
           </li>
         </ul>
